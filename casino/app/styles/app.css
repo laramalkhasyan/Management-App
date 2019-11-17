@@ -1,0 +1,114 @@
+html body {
+    margin: 0;
+    padding: 0;
+}
+
+.application {
+    background-color: #efefef;
+    font-family: Georgia, serif;
+    padding: 10px;
+    color: #434242;
+}
+
+.box {
+    background-color: white;
+    box-shadow: 1px 1px 13px 1px #cccccc;
+    border-radius: 8px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 27px;
+    padding: 10px;
+    border-bottom: 1.5px solid #efefef;
+}
+
+.title>p {
+    margin: 0 auto;
+}
+
+.header-icons {
+    justify-items: flex-end;
+}
+
+.selection {
+    display: flex;
+    border-radius: 8px;
+    justify-content: center;
+}
+
+.selection>p {
+    padding: 5px 40px;
+    border: 1px solid #efefef;
+}
+
+.first {
+    border-radius: 8px 0px 0px 8px;
+}
+
+.last {
+    border-radius: 0px 8px 8px 0px;
+}
+
+.filters {
+    padding: 30px;
+    border-bottom: 1.5px solid #efefef;
+}
+
+.container {
+    background-color: whitesmoke;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+.games {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin: 10px;
+}
+
+.games>img {
+    width: 100%;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+.text {
+    display: flex;
+    padding: 5px;
+    align-items: center;
+}
+
+.details-text {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.text>p {
+    margin: 8px;
+}
+
+.details-text>p {
+    margin: 0;
+}
+
+.text>div {
+    color: rgb(3, 219, 3);
+}
+
+small {
+    color: grey;
+}
+
+.settings-icon {
+    padding: 8px;
+}
