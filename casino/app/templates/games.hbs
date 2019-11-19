@@ -1,28 +1,53 @@
 <div class="filters">
-    <div>
+    <div class="filter-box">
         {{input type="text" value=gameName placeholder="Search" }}
+    </div>
+    <div class="filter-box">
+      <select class="categories" name="categories" placeholder="All categories">
+        <option value="live"></option>
+        <option value="video"></option>
+      </select>
+    </div>
+    <div class="filter-box">
+      <select class="categories" name="categories" placeholder="All categories">
+        <option value=""></option>
+        <option value=""></option>
+      </select>
+    </div>
+    <div class="filter-box">
+      <select class="categories" name="categories" placeholder="All categories">
+        <option value=""></option>
+        <option value=""></option>
+      </select>
+    </div>
+    <div class="filter-box">
+      <select class="categories" name="categories" placeholder="All categories">
+        <option value=""></option>
+        <option value=""></option>
+      </select>
     </div>
 </div>
 <div class="container">
+  {{#each model as |game|}}
     <div class="games box">
         <div class="text">
             <div>
                 {{fa-icon 'circle'}}
-            </div>            
+            </div>
             <p>BetConstruct</p>
         </div>
-        <img src="http://casinosonlinereview.com/wp-content/uploads/Evolution-Gaming-Live-Dealer-Casino-Games.jpg" alt="img">
+        <img src={{game.img}} alt="img">
         <div class="details">
             <div class="details-text">
-                <p>Name</p>
-                <small>Live Dealer</small>
+                <p>{{game.pageTitle}}</p>
+                <small>{{game.category.[0]}}</small>
             </div>
             <div class="settings-icon">
-                {{fa-icon 'ellipsis-v'}}
+              {{fa-icon 'ellipsis-v'}}
             </div>
         </div>
     </div>
+    {{/each}}
 </div>
-
 
 {{outlet}}
