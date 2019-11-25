@@ -1,53 +1,98 @@
 <div class="filters">
-    <div class="filter-box">
-        {{input type="text" value=gameName placeholder="Search" }}
-    </div>
-    <div class="filter-box">
-      <select class="categories" name="categories" placeholder="All categories">
-        <option value="live"></option>
-        <option value="video"></option>
-      </select>
-    </div>
-    <div class="filter-box">
-      <select class="categories" name="categories" placeholder="All categories">
-        <option value=""></option>
-        <option value=""></option>
-      </select>
-    </div>
-    <div class="filter-box">
-      <select class="categories" name="categories" placeholder="All categories">
-        <option value=""></option>
-        <option value=""></option>
-      </select>
-    </div>
-    <div class="filter-box">
-      <select class="categories" name="categories" placeholder="All categories">
-        <option value=""></option>
-        <option value=""></option>
-      </select>
-    </div>
+  <div class="filter-box">
+    {{input type="text" class="input" value=gameName placeholder="Search" }}
+  </div>
+  <div class="filter-box">
+    <select class="categories" name="categories" placeholder="All categories">
+      <option value="live">{{input type="checkbox" checked="live dealer"}}Live Dealer</option>
+      <option value="video">{{input type="checkbox"}}Video</option>
+    </select>
+  </div>
+  <div class="filter-box">
+    <select class="categories" name="categories" placeholder="All categories">
+      <option value=""></option>
+      <option value=""></option>
+    </select>
+  </div>
+  <div class="filter-box">
+    <select class="categories" name="categories" placeholder="All categories">
+      <option value=""></option>
+      <option value=""></option>
+    </select>
+  </div>
+  <div class="filter-box">
+    <select class="categories" name="categories" placeholder="All categories">
+      <option value=""></option>
+      <option value=""></option>
+    </select>
+  </div>
 </div>
 <div class="container">
   {{#each model as |game|}}
-    <div class="games box">
-        <div class="text">
-            <div>
-                {{fa-icon 'circle'}}
-            </div>
-            <p>BetConstruct</p>
-        </div>
-        <img src={{game.img}} alt="img">
-        <div class="details">
-            <div class="details-text">
-                <p>{{game.pageTitle}}</p>
-                <small>{{game.category.[0]}}</small>
-            </div>
-            <div class="settings-icon">
-              {{fa-icon 'ellipsis-v'}}
-            </div>
-        </div>
+  <div class="games box">
+    <div class="text">
+      <div>
+        {{fa-icon 'circle'}}
+      </div>
+      <p>BetConstruct</p>
     </div>
-    {{/each}}
+    <img src={{game.img}} alt="img">
+    <div class="details">
+      <div class="details-text">
+        <p>{{game.pageTitle}}</p>
+        <small>{{game.category.[0]}}</small>
+      </div>
+      <div class="settings-icon" onclick={{action "toggleSetting" game.id}}>
+        {{fa-icon 'ellipsis-v'}}
+      </div>
+    </div>
+  </div>
+  {{#if (eq ID game.id)}}
+    {{#if openSetting}}
+    <div class="setting box">
+      <p class="setting-title">EDIT GAME SETTINGS</p>
+      <div class="edit-setting">
+        <p>Game Info</p>
+        <div>
+          {{fa-icon 'chevron-right'}}
+        </div>
+      </div>
+      <div class="edit-setting" onclick={{action "toggleEditSetting" game.id}}>
+        <p>Social and SEO</p>
+        <div>
+          {{fa-icon 'chevron-right'}}
+        </div>
+      </div>
+    </div>
+    {{/if}}
+    {{#if openEditSetting}}
+      <div class="social box">
+        <div class="setting-title flex">
+          <div {{action "toggleSetting" game.id}}>
+          {{fa-icon 'chevron-left'}}
+          </div>
+          <p class="social-title">SOCIAL AND SEO</p>
+        </div>
+        <div class="edit-setting col">
+          <label>Page Title {{fa-icon "question-circle"}} </label>
+          {{input type="text" class="input" value=editPageTitle}}
+        </div>
+        <div class="edit-setting col">
+          <label>Alias</label>
+          {{input type="text" class="input" value=editAlias}}
+        </div>
+        <div class="edit-setting col">
+          <label>Description</label>
+          {{textarea type="text" class="input" value=editDescription}}
+        </div>
+        <div class="edit-btn">
+          <div class="btn line" onclick={{action "toggleSetting" game.id}}>Discard</div>
+          <div class="btn" onclick={{action "SaveEdit"}}> Save</div>
+        </div>
+      </div>
+    {{/if}}
+  {{/if}}
+  {{/each}}
 </div>
 
 {{outlet}}
