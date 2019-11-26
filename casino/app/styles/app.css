@@ -71,8 +71,8 @@ html body {
 .input {
     padding: 5%;
     border-radius: 5px;
-    background-color: whitesmoke;
     border: 1px solid #d2d2d2;
+    background-color: #dddbdb;
 }
 
 .container {
@@ -138,26 +138,26 @@ small {
     flex-direction: column;
     position: absolute;
     z-index: 1;
-    width: 22%;
-    top: 70%;
-    left: 1%;
+    width: 300px;
+
 }
 
 .setting-title {
     text-align: center;
     margin: 0;
     padding: 15px;
-    border-bottom: 1px solid whitesmoke;
+    border-bottom: 1px solid #dddbdb;
 }
 
 .edit-setting {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid whitesmoke;
-    border-bottom: 1px solid whitesmoke;
+    border-top: 1px solid #dddbdb;
+    border-bottom: 1px solid #dddbdb;
     font-size: 15px;
     padding: 0 15px;
+    border: 8px;
 }
 
 .flex {
@@ -170,8 +170,7 @@ small {
     position: absolute;
     z-index: 1;
     width: 22%;
-    top: 70%;
-    left: 2%;
+
 }
 
 .social-title {
@@ -193,7 +192,7 @@ small {
 .edit-btn {
     display: flex;
     text-align: center;
-    border-top: 1px solid whitesmoke;
+    border-top: 1px solid #dddbdb;
     justify-content: space-evenly;
 }
 
@@ -203,5 +202,12 @@ small {
 }
 
 .line {
-    border-right: 1px solid whitesmoke;
+    border-right: 1px solid #dddbdb;
+}
+.category{
+  display: flex;
+  flex-direction: column;
+}
+.checkbox{
+
 }

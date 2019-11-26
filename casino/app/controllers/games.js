@@ -3,16 +3,40 @@ import Controller from '@ember/controller';
 export default Controller.extend({
     openSetting: false,
     openEditSetting: false,
+    openCategories:false,
+    postionX:'',
+    postionY:'',
+    mouseEvent:'',
     ID: "",
     editPageTitle: '',
     editAlias: '',
     editDescription: '',
+    categoryValue:'',
 
     actions: {
-        toggleSetting(gameId) {
-            this.set("ID", gameId);
-            this.toggleProperty('openSetting');
-            this.set('openEditSetting', false)
+        toggleSetting(gameId,event) {
+          let width=window.innerWidth
+          this.set("ID", gameId);
+          this.toggleProperty('openSetting');
+          if(!(width-event.pageX>=300)){
+            this.setProperties({
+              openEditSetting: false,
+              postionX:event.pageY,
+              postionY:event.pageX -310+(width-event.pageX),
+              mouseEvent: event
+            })
+          }else{
+            this.setProperties({
+              openEditSetting: false,
+              postionX:event.pageY,
+              postionY:event.pageX,
+              mouseEvent: event
+            })
+          }
+        },
+        goBack(){
+          this.toggleProperty('openEditSetting')
+          this.toggleProperty('openSetting')
         },
         toggleEditSetting(gameId) {
             this.toggleProperty("openSetting");
@@ -38,7 +62,13 @@ export default Controller.extend({
                 })
                 game.save();
             });
-            this.send('toggleSetting', this.ID);
+            this.send('toggleSetting', this.ID, this.mouseEvent);
+        },
+
+        toggleEditCategories(){
+          this.toggleProperty("openSetting");
+          this.toggleProperty('openCategories')
+          
         }
     }
 });
