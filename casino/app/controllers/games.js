@@ -1,4 +1,7 @@
 import Controller from '@ember/controller';
+import { A } from '@ember/array';
+import { computed } from '@ember/object';
+import { sort } from '@ember/object/computed';
 
 export default Controller.extend({
     openSetting: false,
@@ -11,7 +14,31 @@ export default Controller.extend({
     editPageTitle: '',
     editAlias: '',
     editDescription: '',
-    categoryValue:'',
+    arrayCategory: A(),
+    searchTerm: '',
+    sortBy:'titleAsc',
+
+    sortProperties: computed('sortBy', function() {
+      let options = {
+        titleDesc: ['pageTitle:desc'],
+        titleAsc: ['pageTitle:asc']
+      };
+      return options[this.sortBy];
+    }),
+
+    sortedGames: sort('matchingGames', 'sortProperties'),
+
+    matchingGames:computed('model.@each.pageTitle','searchTerm',function(){
+        // if(!searchTerm){
+        //   return this.model
+        // }else{
+          let search = this.searchTerm.toLowerCase();
+          return this.model.filter((game) => {
+            return game.pageTitle.toLowerCase().includes(search);
+          });
+        // }
+      }
+    ),
 
     actions: {
         toggleSetting(gameId,event) {
@@ -68,7 +95,24 @@ export default Controller.extend({
         toggleEditCategories(){
           this.toggleProperty("openSetting");
           this.toggleProperty('openCategories')
-          
+        },
+        SaveCategory(){
+          this.store.findRecord('game', this.ID).then((game) => {
+              let cat = this.arrayCategory
+              game.setProperties({
+                  category: cat
+              })
+              game.save();
+          });
+          this.send('toggleEditCategories');
+        },
+        addCategories(item,event){
+          if(event.target.checked){
+            this.arrayCategory.push(item)
+          }else{
+            let index = this.arrayCategory.indexOf(item)
+            this.arrayCategory.splice(index,1)
+          }
         }
     }
 });

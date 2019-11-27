@@ -1,11 +1,10 @@
 import DS from 'ember-data';
-const { Model, attr } = DS;
+const { Model, attr, hasMany} = DS;
 
 export default Model.extend({
-  name:attr(),
   img:attr(),
   pageTitle:attr(),
   alias:attr(),
   description:attr(),
-  category:attr(),
+  categories:hasMany(),
 });

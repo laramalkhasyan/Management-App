@@ -1,33 +1,30 @@
 <div class="filters">
   <div class="filter-box">
-    {{input type="text" class="input" value=gameName placeholder="Search" }}
+    {{input type="text" class="input" value=searchTerm placeholder="Search" }}
   </div>
   <div class="filter-box ">
-    <select class="input" name="categories" placeholder="All categories">
-      <option value="live">All categories</option>
+    <select class="input size">
+      <option value="live">All Categories</option>
     </select>
   </div>
   <div class="filter-box">
-    <select class="categories" name="categories" placeholder="All categories">
-      <option value=""></option>
-      <option value=""></option>
+    <select class="input size" >
+      <option value="">All Providers</option>
     </select>
   </div>
   <div class="filter-box">
-    <select class="categories" name="categories" placeholder="All categories">
-      <option value=""></option>
-      <option value=""></option>
+    <select class="input size">
+      <option value="">All Statuses</option>
     </select>
   </div>
-  <div class="filter-box">
-    <select class="categories" name="categories" placeholder="All categories">
-      <option value=""></option>
+  <!-- <div class="filter-box">
+    <select class="categories">
       <option value=""></option>
     </select>
-  </div>
+  </div> -->
 </div>
 <div class="container">
-  {{#each model as |game|}}
+  {{#each sortedGames as |game|}}
     <div class="games box">
       <div class="text">
         <div>
@@ -99,18 +96,20 @@
       {{#if openCategories}}
         <div class="social box" style="top:{{postionX}}px;left:{{postionY}}px">
           <div class="setting-title flex">
-            <div onclick={{action "goBack"}}>
-              {{fa-icon 'chevron-left'}}
-            </div>
             <p class="social-title">CHOOSE CATEGORY</p>
           </div>
           <div class="category">
             <p>Categories</p>
-            {{#each game.category as |item| }}
-              <div class="checkbox">
-                {{input type="checkbox" class="check" checked=categoryValue}}{{item}}
-              </div>
+            {{#each model.categories as |item index|}}
+              <label class="checkbox">{{item.name}}
+                <input  type="checkbox" onchange={{action 'addCategories' item.name}}>
+                <span class="checkmark"></span>
+              </label>
             {{/each}}
+          </div>
+          <div class="edit-btn">
+            <div class="btn line" onclick={{action "toggleEditCategories"}}>Discard</div>
+            <div class="btn" onclick={{action "SaveCategory"}}> Save</div>
           </div>
         </div>
       {{/if}}
