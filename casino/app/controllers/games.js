@@ -22,9 +22,8 @@ export default Controller.extend({
 
     limit:20,
 
-    paginatedItems: computed('offset', function(){
+    paginatedItems: computed('offset','searchTerm', function(){
       let matchedModel = this.matchingGames
-      console.log(matchedModel);
       let lim = this.limit
       let off = this.offset
       return matchedModel.slice(0,lim*off);
@@ -124,9 +123,8 @@ export default Controller.extend({
         },
         detectScroll(){
           let scroll = document.querySelector('.container')
-          if (scroll.scrollTop + window.innerHeight >= scroll.innerHeight- 100) {
-            console.log('hi');
-            this.offset++
+          if (scroll.scrollTop + window.innerHeight >= scroll.offsetHeight- 100) {
+            this.incrementProperty('offset')
         };
       }
     }
