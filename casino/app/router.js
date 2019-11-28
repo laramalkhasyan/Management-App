@@ -7,7 +7,11 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('games');
+  this.route('games'
+  // , function () {
+  //   this.route('categories');
+  // }
+);
   this.route('categories');
 });
 

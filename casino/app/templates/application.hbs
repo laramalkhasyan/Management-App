@@ -1,26 +1,28 @@
-<div class="application">
-  <div class="box">
-    <div class="title">
-      <p>CASINO APP</p>
-      <div class="header-icons">
-        {{fa-icon "question-circle"}}
-        {{fa-icon "times"}}
+<body >
+  <div class="application">
+    <div class="box">
+      <div class="title">
+        <p>CASINO APP</p>
+        <div class="header-icons">
+          {{fa-icon "question-circle"}}
+          {{fa-icon "times"}}
+        </div>
       </div>
+      <div class="selection">
+        {{#link-to "games"}}
+          <p class="first">Games</p>
+        {{/link-to}}
+        {{#link-to "categories"}}
+          <p>Categories</p>
+        {{/link-to}}
+        {{#link-to "categories"}}
+          <p>Types</p>
+        {{/link-to}}
+        {{#link-to "categories"}}
+          <p class="last">Providers</p>
+        {{/link-to}}
+      </div>
+      {{outlet}}
     </div>
-    <div class="selection">
-      {{#link-to "games"}}
-        <p class="first">Games</p>
-      {{/link-to}}
-      {{#link-to "categories"}}
-        <p>Categories</p>
-      {{/link-to}}
-      {{#link-to "categories"}}
-        <p>Types</p>
-      {{/link-to}}
-      {{#link-to "categories"}}
-        <p class="last">Providers</p>
-      {{/link-to}}
-    </div>
-    {{outlet}}
   </div>
-</div>
+</body>

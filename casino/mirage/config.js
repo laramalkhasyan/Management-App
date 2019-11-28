@@ -3,6 +3,7 @@ export default function() {
 
     this.get('/games');
     this.get('/games/:id');
+    this.get('/categories')
     this.patch('/games/:id')
 
 }

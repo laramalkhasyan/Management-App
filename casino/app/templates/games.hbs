@@ -8,7 +8,7 @@
     </select>
   </div>
   <div class="filter-box">
-    <select class="input size" >
+    <select class="input size">
       <option value="">All Providers</option>
     </select>
   </div>
@@ -23,98 +23,100 @@
     </select>
   </div> -->
 </div>
-<div class="container">
-  {{#each sortedGames as |game|}}
-    <div class="games box">
-      <div class="text">
-        <div>
-          {{fa-icon "circle"}}
+<div class="container" onscroll={{action 'detectScroll'}}>
+    {{#each sortedGames as |game|}}
+      <div class="games box">
+        <div class="text">
+          <div>
+            {{fa-icon "circle"}}
+          </div>
+          <p>BetConstruct</p>
         </div>
-        <p>BetConstruct</p>
+        <img src={{game.img}} alt="img">
+        <div class="details">
+          <div class="details-text">
+            <p>{{game.pageTitle}}</p>
+            <small>{{game.category.[0]}}</small>
+          </div>
+          <div class="settings-icon" onclick={{action "toggleSetting" game.id}}>
+            {{fa-icon "ellipsis-v"}}
+          </div>
+        </div>
       </div>
-      <img src={{game.img}} alt="img">
-      <div class="details">
-        <div class="details-text">
-          <p>{{game.pageTitle}}</p>
-          <small>{{game.category.[0]}}</small>
-        </div>
-        <div class="settings-icon" onclick={{action "toggleSetting" game.id}}>
-          {{fa-icon "ellipsis-v"}}
-        </div>
-      </div>
-    </div>
-    {{#if (eq ID game.id)}}
-      {{#if openSetting}}
-        <div class="setting box" style="top:{{postionX}}px;left:{{postionY}}px">
-          <p class="setting-title">EDIT GAME SETTINGS</p>
-          <div class="edit-setting">
-            <p>Game Info</p>
-            <div>
-              {{fa-icon "chevron-right"}}
+      {{#if (eq ID game.id)}}
+        {{#if openSetting}}
+          <div class="setting box" style="top:{{postionX}}px;left:{{postionY}}px">
+            <p class="setting-title">EDIT GAME SETTINGS</p>
+            <div class="edit-setting">
+              <p>Game Info</p>
+              <div>
+                {{fa-icon "chevron-right"}}
+              </div>
+            </div>
+            <div class="edit-setting" onclick={{action "toggleEditSetting" game.id}}>
+              <p>Social and SEO</p>
+              <div>
+                {{fa-icon "chevron-right"}}
+              </div>
+            </div>
+            <div class="edit-setting" onclick={{action "toggleEditCategories" game.id}}>
+              <p>Choose category</p>
+              <div>
+                {{fa-icon 'chevron-right'}}
+              </div>
             </div>
           </div>
-          <div class="edit-setting" onclick={{action "toggleEditSetting" game.id}}>
-            <p>Social and SEO</p>
-            <div>
-              {{fa-icon "chevron-right"}}
+        {{/if}}
+        {{#if openEditSetting}}
+          <div class="social box" style="top:{{postionX}}px;left:{{postionY}}px">
+            <div class="setting-title flex">
+              <div onclick={{action "goBack"}}>
+                {{fa-icon 'chevron-left'}}
+              </div>
+              <p class="social-title">SOCIAL AND SEO</p>
+            </div>
+            <div class="edit-setting col">
+              <label>Page Title {{fa-icon "question-circle"}} </label>
+              {{input type="text" class="input" value=editPageTitle}}
+            </div>
+            <div class="edit-setting col">
+              <label>Alias</label>
+              {{input type="text" class="input" value=editAlias}}
+            </div>
+            <div class="edit-setting col">
+              <label>Description</label>
+              {{textarea type="text" class="input" value=editDescription}}
+            </div>
+            <div class="edit-btn">
+              <div class="btn line" onclick={{action "goBack"}}>Discard</div>
+              <div class="btn" onclick={{action "SaveEdit"}}> Save</div>
             </div>
           </div>
-          <div class="edit-setting" onclick={{action "toggleEditCategories" game.id}}>
-            <p>Choose category</p>
-            <div>
-              {{fa-icon 'chevron-right'}}
+        {{/if}}
+        {{#if openCategories}}
+          <div class="social box" style="top:{{postionX}}px;left:{{postionY}}px">
+            <div class="setting-title flex">
+              <p class="social-title">CHOOSE CATEGORY</p>
+            </div>
+            <div class="category">
+              <p>Categories</p>
+              {{log model}}
+              {{#each model.categories as |item index|}}
+                <label class="checkbox">
+                  {{item.name}}
+                  <input type="checkbox" onchange={{action 'addCategories' item.name}}>
+                  <span class="checkmark"></span>
+                </label>
+              {{/each}}
+            </div>
+            <div class="edit-btn">
+              <div class="btn line" onclick={{action "toggleEditCategories"}}>Discard</div>
+              <div class="btn" onclick={{action "SaveCategory"}}> Save</div>
             </div>
           </div>
-        </div>
+        {{/if}}
       {{/if}}
-      {{#if openEditSetting}}
-        <div class="social box" style="top:{{postionX}}px;left:{{postionY}}px">
-          <div class="setting-title flex">
-            <div onclick={{action "goBack"}}>
-              {{fa-icon 'chevron-left'}}
-            </div>
-            <p class="social-title">SOCIAL AND SEO</p>
-          </div>
-          <div class="edit-setting col">
-            <label>Page Title {{fa-icon "question-circle"}} </label>
-            {{input type="text" class="input" value=editPageTitle}}
-          </div>
-          <div class="edit-setting col">
-            <label>Alias</label>
-            {{input type="text" class="input" value=editAlias}}
-          </div>
-          <div class="edit-setting col">
-            <label>Description</label>
-            {{textarea type="text" class="input" value=editDescription}}
-          </div>
-          <div class="edit-btn">
-            <div class="btn line" onclick={{action "goBack"}}>Discard</div>
-            <div class="btn" onclick={{action "SaveEdit"}}> Save</div>
-          </div>
-        </div>
-      {{/if}}
-      {{#if openCategories}}
-        <div class="social box" style="top:{{postionX}}px;left:{{postionY}}px">
-          <div class="setting-title flex">
-            <p class="social-title">CHOOSE CATEGORY</p>
-          </div>
-          <div class="category">
-            <p>Categories</p>
-            {{#each model.categories as |item index|}}
-              <label class="checkbox">{{item.name}}
-                <input  type="checkbox" onchange={{action 'addCategories' item.name}}>
-                <span class="checkmark"></span>
-              </label>
-            {{/each}}
-          </div>
-          <div class="edit-btn">
-            <div class="btn line" onclick={{action "toggleEditCategories"}}>Discard</div>
-            <div class="btn" onclick={{action "SaveCategory"}}> Save</div>
-          </div>
-        </div>
-      {{/if}}
-    {{/if}}
-  {{/each}}
+    {{/each}}
 </div>
 
 {{outlet}}

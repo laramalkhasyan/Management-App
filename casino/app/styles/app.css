@@ -46,7 +46,7 @@ html body {
 }
 .selection a{
   text-decoration: none;
-  
+
 }
 .first {
     border-radius: 8px 0px 0px 8px;
@@ -85,6 +85,8 @@ html body {
     background-color: whitesmoke;
     flex-wrap: wrap;
     justify-content: center;
+    max-height: calc(100vh - 250px);
+    overflow: auto;
 }
 
 .games {

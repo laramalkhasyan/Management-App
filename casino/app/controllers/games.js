@@ -17,6 +17,18 @@ export default Controller.extend({
     arrayCategory: A(),
     searchTerm: '',
     sortBy:'titleAsc',
+    offset:1,
+    lastScrollTop: 0,
+
+    limit:20,
+
+    paginatedItems: computed('offset', function(){
+      let matchedModel = this.matchingGames
+      console.log(matchedModel);
+      let lim = this.limit
+      let off = this.offset
+      return matchedModel.slice(0,lim*off);
+    }),
 
     sortProperties: computed('sortBy', function() {
       let options = {
@@ -26,17 +38,13 @@ export default Controller.extend({
       return options[this.sortBy];
     }),
 
-    sortedGames: sort('matchingGames', 'sortProperties'),
+    sortedGames: sort('paginatedItems', 'sortProperties'),
 
     matchingGames:computed('model.@each.pageTitle','searchTerm',function(){
-        // if(!searchTerm){
-        //   return this.model
-        // }else{
           let search = this.searchTerm.toLowerCase();
           return this.model.filter((game) => {
             return game.pageTitle.toLowerCase().includes(search);
           });
-        // }
       }
     ),
 
@@ -113,6 +121,13 @@ export default Controller.extend({
             let index = this.arrayCategory.indexOf(item)
             this.arrayCategory.splice(index,1)
           }
-        }
+        },
+        detectScroll(){
+          let scroll = document.querySelector('.container')
+          if (scroll.scrollTop + window.innerHeight >= scroll.innerHeight- 100) {
+            console.log('hi');
+            this.offset++
+        };
+      }
     }
 });
