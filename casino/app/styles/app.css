@@ -138,6 +138,11 @@ small {
 
 .settings-icon {
     padding: 8px;
+    cursor: pointer;
+}
+.icon{
+  cursor: pointer;
+  
 }
 
 .setting {

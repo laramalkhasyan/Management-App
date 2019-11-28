@@ -49,19 +49,19 @@
             <p class="setting-title">EDIT GAME SETTINGS</p>
             <div class="edit-setting">
               <p>Game Info</p>
-              <div>
+              <div class='icon'>
                 {{fa-icon "chevron-right"}}
               </div>
             </div>
             <div class="edit-setting" onclick={{action "toggleEditSetting" game.id}}>
               <p>Social and SEO</p>
-              <div>
+              <div class='icon'>
                 {{fa-icon "chevron-right"}}
               </div>
             </div>
             <div class="edit-setting" onclick={{action "toggleEditCategories" game.id}}>
               <p>Choose category</p>
-              <div>
+              <div class='icon'>
                 {{fa-icon 'chevron-right'}}
               </div>
             </div>
@@ -70,7 +70,7 @@
         {{#if openEditSetting}}
           <div class="social box" style="top:{{postionX}}px;left:{{postionY}}px">
             <div class="setting-title flex">
-              <div onclick={{action "goBack"}}>
+              <div class='icon' onclick={{action "goBack"}}>
                 {{fa-icon 'chevron-left'}}
               </div>
               <p class="social-title">SOCIAL AND SEO</p>
@@ -88,8 +88,8 @@
               {{textarea type="text" class="input" value=editDescription}}
             </div>
             <div class="edit-btn">
-              <div class="btn line" onclick={{action "goBack"}}>Discard</div>
-              <div class="btn" onclick={{action "SaveEdit"}}> Save</div>
+              <div class="btn line icon" onclick={{action "goBack"}}>Discard</div>
+              <div class="btn icon" onclick={{action "SaveEdit"}}> Save</div>
             </div>
           </div>
         {{/if}}
@@ -110,8 +110,8 @@
               {{/each}}
             </div>
             <div class="edit-btn">
-              <div class="btn line" onclick={{action "toggleEditCategories"}}>Discard</div>
-              <div class="btn" onclick={{action "SaveCategory"}}> Save</div>
+              <div class="btn line icon" onclick={{action "toggleEditCategories"}}>Discard</div>
+              <div class="btn icon" onclick={{action "SaveCategory"}}> Save</div>
             </div>
           </div>
         {{/if}}
